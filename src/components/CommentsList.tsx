@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Comment, CommentFormData } from '../types/commentTypes';
+import { Comment, UpdateCommentRequest } from '../types/commentTypes';
 import CommentItem from './CommentItem';
 import { getComments, updateComment, deleteComment } from '../api/apiClient';
 import { toast } from 'react-toastify';
@@ -57,7 +57,7 @@ const CommentsList = () => {
     fetchComments();
   }, []);
 
-  const handleEdit = async (id: string, data: CommentFormData, existingComment: Comment) => {
+  const handleEdit = async (id: string, data: UpdateCommentRequest, existingComment: Comment) => {
     try {
       const updatedComment = await updateComment(id, data, existingComment);
       setComments(prevComments => 

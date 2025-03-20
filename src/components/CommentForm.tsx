@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Comment, CommentFormData } from '../types/commentTypes';
+import { Comment, PostCommentRequest } from '../types/commentTypes';
 
 interface CommentFormProps {
   comment?: Comment;
-  onSubmit: (data: CommentFormData) => Promise<void>;
+  onSubmit: (data: PostCommentRequest) => Promise<void>;
   onCancel?: () => void;
   isEditing?: boolean;
 }
 
 const CommentForm = ({ comment, onSubmit, onCancel, isEditing = false }: CommentFormProps) => {
-  const [formData, setFormData] = useState<CommentFormData>({
+  const [formData, setFormData] = useState<PostCommentRequest>({
+    user_id: '999',
+    author: 'Admin',
     text: '',
     image: '',
   });
@@ -23,6 +25,8 @@ const CommentForm = ({ comment, onSubmit, onCancel, isEditing = false }: Comment
       const image = comment.image || '';
       
       setFormData({
+        user_id: '999',
+        author: 'Admin',
         text: commentText,
         image: image,
       });
@@ -82,7 +86,12 @@ const CommentForm = ({ comment, onSubmit, onCancel, isEditing = false }: Comment
       await onSubmit(formData);
       if (!isEditing) {
         // Reset form after successful submission if not editing
-        setFormData({ text: '', image: '' });
+        setFormData({ 
+          user_id: '999',
+          author: 'Admin',
+          text: '', 
+          image: '' 
+        });
       }
     } catch (error) {
       console.error('Error submitting form:', error);

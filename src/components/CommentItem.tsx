@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Comment, CommentFormData } from '../types/commentTypes';
+import { Comment, UpdateCommentRequest } from '../types/commentTypes';
 import CommentForm from './CommentForm';
 import { FaEdit, FaTrash, FaThumbsUp } from 'react-icons/fa';
 
 interface CommentItemProps {
   comment: Comment;
-  onEdit: (id: string, data: CommentFormData, existingComment: Comment) => Promise<void>;
+  onEdit: (comment_id: string, data: UpdateCommentRequest, existingComment: Comment) => Promise<void>;
   onDelete: (id: string) => Promise<void>;
 }
 
@@ -17,7 +17,7 @@ const CommentItem = ({ comment, onEdit, onDelete }: CommentItemProps) => {
   const commentText = comment.text || '';
   const imageUrl = comment.image || null;
   
-  const handleEdit = async (data: CommentFormData) => {
+  const handleEdit = async (data: UpdateCommentRequest) => {
     await onEdit(commentId, data, comment);
     setIsEditing(false);
   };
