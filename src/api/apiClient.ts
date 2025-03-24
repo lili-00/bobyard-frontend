@@ -25,9 +25,9 @@ export const getComments = async (): Promise<Comment[]> => {
 };
 
 // Add a new comment
-export const postComment = async (data: PostCommentRequest): Promise<Comment> => {
+export const postComment = async (data: PostCommentRequest): Promise<CommentResponse> => {
   try {
-    const response = await api.post<Comment>('/comments/post', data);
+    const response = await api.post<CommentResponse>('/comments/post', data);
     console.log('Post response:', response.data);
     return response.data;
   } catch (error: any) {
@@ -56,10 +56,10 @@ export const updateComment = async (comment_id: string, data: UpdateCommentReque
 };
 
 // Delete a comment
-export const deleteComment = async (commentId: string): Promise<void> => {
+export const deleteComment = async (commentId: string): Promise<CommentResponse> => {
   try {
-    // Try the original endpoint first
-    await api.delete(`/comments/delete/${commentId}`);
+    const response = await api.delete<CommentResponse>(`/comments/delete/${commentId}`);
+    return response.data
   } catch (error: any) {
     console.log(error, 'Error deleting comment');
     throw error;

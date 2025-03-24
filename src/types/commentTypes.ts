@@ -1,6 +1,5 @@
 export interface Comment {
-  comment_id?: string;
-  user_id?: string;
+  id?: string;
   author: string;
   text?: string;
   date: string;
@@ -9,7 +8,6 @@ export interface Comment {
 }
 
 export interface PostCommentRequest {
-  user_id: string;
   author: string;
   text: string;
   image: string;
@@ -23,12 +21,12 @@ export interface UpdateCommentRequest {
 
 export interface CommentResponse {
   message: string;
-  comment_id: string;
+  id: string;
 }
 
 export interface UpdateCommentResponse {
   message: string;
-  comment_id: string;
+  id: string;
   text: string;
   image: string;
 }

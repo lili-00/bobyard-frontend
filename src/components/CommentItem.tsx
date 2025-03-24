@@ -13,7 +13,7 @@ const CommentItem = ({ comment, onEdit, onDelete }: CommentItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   
-  const commentId = comment.comment_id || '';
+  const commentId = comment.id || '';
   const commentText = comment.text || '';
   const imageUrl = comment.image || null;
   
@@ -61,7 +61,7 @@ const CommentItem = ({ comment, onEdit, onDelete }: CommentItemProps) => {
     return (
       <CommentForm
         comment={{
-          comment_id: commentId,
+          id: commentId,
           text: commentText,
           author: comment.author,
           date: comment.date,

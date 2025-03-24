@@ -10,7 +10,6 @@ interface CommentFormProps {
 
 const CommentForm = ({ comment, onSubmit, onCancel, isEditing = false }: CommentFormProps) => {
   const [formData, setFormData] = useState<PostCommentRequest>({
-    user_id: '999',
     author: 'Admin',
     text: '',
     image: '',
@@ -25,7 +24,6 @@ const CommentForm = ({ comment, onSubmit, onCancel, isEditing = false }: Comment
       const image = comment.image || '';
       
       setFormData({
-        user_id: '999',
         author: 'Admin',
         text: commentText,
         image: image,
@@ -87,7 +85,6 @@ const CommentForm = ({ comment, onSubmit, onCancel, isEditing = false }: Comment
       if (!isEditing) {
         // Reset form after successful submission if not editing
         setFormData({ 
-          user_id: '999',
           author: 'Admin',
           text: '', 
           image: '' 

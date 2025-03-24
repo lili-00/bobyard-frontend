@@ -62,7 +62,7 @@ const CommentsList = () => {
       const updatedComment = await updateComment(id, data, existingComment);
       setComments(prevComments => 
         prevComments.map(comment => {
-          const commentId = comment.comment_id;
+          const commentId = comment.id;
           if (commentId === id) {
             return updatedComment;
           }
@@ -82,7 +82,7 @@ const CommentsList = () => {
       setComments(prevComments => 
         prevComments.filter(comment => {
           // Check if the comment has comment_id
-          const commentId = comment.comment_id;
+          const commentId = comment.id;
           return commentId !== id;
         })
       );
@@ -137,7 +137,7 @@ const CommentsList = () => {
       <div className="space-y-4">
         {comments.map(comment => {
           // Use comment_id as key if available, otherwise use id
-          const key = comment.comment_id || Math.random().toString();
+          const key = comment.id || Math.random().toString();
           return (
             <CommentItem
               key={key}
