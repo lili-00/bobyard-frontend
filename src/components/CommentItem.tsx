@@ -7,9 +7,10 @@ interface CommentItemProps {
   comment: Comment;
   onEdit: (comment_id: string, data: UpdateCommentRequest, existingComment: Comment) => Promise<void>;
   onDelete: (id: string) => Promise<void>;
+  level?: number;
 }
 
-const CommentItem = ({ comment, onEdit, onDelete }: CommentItemProps) => {
+const CommentItem = ({ comment, onEdit, onDelete, level = 0 }: CommentItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   
@@ -126,6 +127,21 @@ const CommentItem = ({ comment, onEdit, onDelete }: CommentItemProps) => {
         <FaThumbsUp className="mr-1" />
         <span>{comment.likes} likes</span>
       </div>
+
+      {/* recursive rendering of replies */}
+      {comment.replies && comment.replies.length > 0 && (
+        <div className='replies-container ml-8 mt-2'>
+          {comment.replies.map(reply => (
+            <CommentItem
+              key={reply.id || Math.random().toString()}
+              comment={reply}
+              onEdit={onEdit}
+              onDelete={onDelete}
+              level={level + 1}
+          />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
